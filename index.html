@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#26050f">
+<meta name="description" content="You are invited to our wedding">
+<meta property="og:title" content="Wedding Invitation"><meta property="og:description" content="Join us to celebrate our wedding"><meta property="og:image" content="assets/rings.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🌹%3C/text%3E%3C/svg%3E">
 <title>Wedding Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet">
@@ -103,6 +107,29 @@ footer small{opacity:.6;display:block;margin-top:1.5rem}
 .rv{opacity:0;transform:translateY(24px);transition:1s}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+html{-webkit-text-size-adjust:100%}
+#snd{top:calc(1rem + env(safe-area-inset-top));right:calc(1rem + env(safe-area-inset-right))}
+#hero,.stage{height:100vh;height:100svh}
+.mandala{position:absolute;left:50%;top:50%;width:min(112%,calc(100svh*.75));aspect-ratio:1;opacity:0;pointer-events:none;stroke-opacity:.45;stroke-width:.5;will-change:transform}
+.arena .fig{position:relative}
+.when{flex:0 0 100%;margin:.4rem 0 0;font:italic clamp(1.05rem,2.8vw,1.5rem) var(--serif);letter-spacing:.04em}
+@media(max-aspect-ratio:1/1){.fig{max-width:57%;object-position:center}#groom{margin-left:-13%}.names h2{font-size:clamp(2.6rem,13vw,4.4rem)}}
+@media(max-height:480px){.names h2{font-size:2rem}.when{font-size:.95rem}.together{font-size:1rem}.stage{gap:.4rem}}
+.gal{display:grid;gap:2.5rem}
+@media(min-width:820px){.gal{grid-template-columns:1fr 1fr;gap:3rem;align-items:start}.mom:nth-child(2){margin-top:4rem}}
+.mom{margin:0}
+.zoom{display:block;position:relative;width:100%;padding:10px;border:1px solid var(--gold);border-radius:18px;background:var(--wine);cursor:zoom-in;transition:transform .4s}
+.zoom img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px}
+.zoom:after{content:"⤢";position:absolute;right:22px;bottom:22px;width:38px;height:38px;border-radius:50%;background:#26050fcc;color:var(--gold);display:grid;place-items:center;font-size:1.2rem}
+@media(hover:hover){.zoom:hover{transform:translateY(-4px)}}
+.mom figcaption{padding:1.2rem .5rem 0;text-align:center}
+.mom h3{font-size:2rem;color:var(--gold)}.mom p{opacity:.8}
+#lb{position:fixed;inset:0;z-index:60;background:#14030af2;display:grid;place-items:center;padding:1rem;cursor:zoom-out}
+#lb[hidden]{display:none}
+#lb img{max-width:100%;max-height:86svh;border-radius:8px}
+#lbx{position:absolute;top:calc(1rem + env(safe-area-inset-top));right:1rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:#26050f;cursor:pointer;font-size:1.2rem}
+input,select,textarea{min-height:48px}.btn{min-height:52px}
+@media(max-width:600px){section{padding-left:1.1rem;padding-right:1.1rem}.card{border-radius:90px 90px 6px 6px}#count{gap:.9rem}}
 </style>
 </head>
 <body>
@@ -120,7 +147,7 @@ footer small{opacity:.6;display:block;margin-top:1.5rem}
 <button id="snd" aria-label="Mute or unmute music">🔊</button>
 
 <header id="hero">
-  <video id="vid" src="assets/hero.mp4" muted autoplay playsinline loop preload="auto"></video>
+  <video id="vid" src="assets/hero.mp4" poster="assets/poster.jpg" muted autoplay playsinline loop preload="auto"></video>
   <div class="hero-t">
     <h2>We are getting married</h2>
     <span class="hint">SCROLL DOWN</span>
@@ -130,8 +157,8 @@ footer small{opacity:.6;display:block;margin-top:1.5rem}
 <section id="story" aria-label="Our story">
   <div class="stage">
     <div class="glow" id="glow"></div>
-    <div class="names" id="names"><h2 class="gold" id="sName1"></h2><span class="amp">&amp;</span><h2 class="gold" id="sName2"></h2></div>
-    <div class="arena">
+    <div class="names" id="names"><h2 class="gold" id="sName1"></h2><span class="amp">&amp;</span><h2 class="gold" id="sName2"></h2><p class="when" id="when"></p></div>
+    <div class="arena"><svg class="mandala" id="md" viewBox="0 0 200 200" fill="none" stroke="#d9ad5b" aria-hidden="true"><circle cx="100" cy="100" r="98" stroke-dasharray="1 3"/><circle cx="100" cy="100" r="90"/><circle cx="100" cy="100" r="60"/></svg>
       <img class="fig" id="bride" src="assets/bride.png" alt="Bride">
       <img class="fig" id="groom" src="assets/groom.png" alt="Groom">
     </div>
@@ -160,15 +187,18 @@ footer small{opacity:.6;display:block;margin-top:1.5rem}
   </div>
 </section>
 
-<section class="photo" aria-label="Ring exchange">
-  <img data-par src="assets/rings.jpg" alt="Bride and groom exchanging rings at the poruwa">
-  <div class="rv"><h2>With this ring</h2><p>Beneath the golden poruwa, surrounded by family and the blessings of those we love most.</p></div>
+<section id="moments">
+  <div class="wrap">
+    <h2 class="rv">Our moments</h2>
+    <div class="gal">
+      <figure class="mom rv"><button class="zoom" data-src="assets/rings.jpg" aria-label="Enlarge photo: ring exchange"><img loading="lazy" decoding="async" width="1199" height="896" src="assets/rings.jpg" alt="Bride and groom exchanging rings at the poruwa"></button>
+        <figcaption><h3>With this ring</h3><p>Beneath the golden poruwa, surrounded by family and the blessings of those we love most.</p></figcaption></figure>
+      <figure class="mom rv"><button class="zoom" data-src="assets/leaving.jpg" aria-label="Enlarge photo: just married"><img loading="lazy" decoding="async" width="1199" height="896" src="assets/leaving.jpg" alt="Bride and groom leaving the hotel, Just Married"></button>
+        <figcaption><h3>Just married</h3><p>And off we go, into a lifetime together. Come celebrate the beginning.</p></figcaption></figure>
+    </div>
+  </div>
 </section>
-
-<section class="photo" aria-label="Just married">
-  <img data-par src="assets/leaving.jpg" alt="Bride and groom leaving the hotel, Just Married">
-  <div class="rv"><h2>Just married</h2><p>And off we go, into a lifetime together. Come celebrate the beginning.</p></div>
-</section>
+<div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden><button id="lbx" aria-label="Close photo">✕</button><img alt=""></div>
 
 <section id="rsvp">
   <div class="wrap">
@@ -255,7 +285,7 @@ let W,H,sy=scrollY,vel=0,burstDone=false;const P=[],COL=["#b3122f","#d4274a","#e
 function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
 function mk(x,y,b){return{x:x??Math.random()*W,y:y??Math.random()*H,z:.4+Math.random()*.9,rose:Math.random()<.2,r:Math.random()*6,vr:(Math.random()-.5)*.03,sw:Math.random()*6,
   vx:b?(Math.random()-.5)*14:0,vy:b?-Math.random()*12-3:0,b,c:COL[Math.random()*4|0]}}
-for(let i=0;i<(still?0:32);i++)P.push(mk());
+for(let i=0;i<(still?0:innerWidth<700?18:32);i++)P.push(mk());
 function petal(p){const s=14*p.z;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.globalAlpha=.85;cx.beginPath();
   cx.moveTo(0,-s);cx.bezierCurveTo(s,-s*.6,s*.8,s*.8,0,s);cx.bezierCurveTo(-s*.8,s*.8,-s,-s*.6,0,-s);cx.fill();cx.restore()}
 function loop(){cx.clearRect(0,0,W,H);vel*=.92;
@@ -266,13 +296,18 @@ function loop(){cx.clearRect(0,0,W,H);vel*=.92;
 if(!still)loop();
 
 /* scroll-driven story */
-const story=$("story"),br=$("bride"),gr=$("groom"),nm=$("names"),tg=$("together"),gl=$("glow");
+const md=$("md"),story=$("story"),br=$("bride"),gr=$("groom"),nm=$("names"),tg=$("together"),gl=$("glow");
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),ease=t=>t*t*(3-2*t);
+md.innerHTML=Array.from({length:16},(_,i)=>`<ellipse cx="100" cy="38" rx="9" ry="26" transform="rotate(${i*22.5} 100 100)"/><ellipse cx="100" cy="64" rx="4" ry="12" transform="rotate(${i*22.5+11.25} 100 100)"/>`).join("")+md.innerHTML;
+$("when").textContent=d.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+const lb=$("lb"),li=lb.querySelector("img");
+document.querySelectorAll(".zoom").forEach(b=>b.onclick=()=>{li.src=b.dataset.src;li.alt=b.querySelector("img").alt;lb.hidden=false;$("lbx").focus()});
+lb.onclick=()=>lb.hidden=true;addEventListener("keydown",e=>e.key==="Escape"&&(lb.hidden=true));
 function tick(){
   const r=story.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight));
   const move=ease(clamp(p/.62)),off=(1-move)*(innerWidth*.55+220),bob=Math.sin(move*40)*(1-move)*8;
   br.style.transform=`translate(${-off}px,${bob}px)`;gr.style.transform=`translate(${off}px,${-bob}px)`;
-  gl.style.opacity=move;
+  gl.style.opacity=move;md.style.opacity=move*.9;md.style.transform=`translate(-50%,-50%) rotate(${p*140}deg) scale(${.7+.3*move})`;
   const n=ease(clamp((p-.35)/.25));nm.style.opacity=n;nm.style.transform=`translateY(${(1-n)*30}px) scale(${.9+.1*n})`;
   const t=ease(clamp((p-.72)/.2));tg.style.opacity=t;tg.style.transform=`translateY(${(1-t)*30}px)`;
   if(!still){if(p>.62&&p<.98&&!burstDone){burstDone=true;for(let i=0;i<70;i++)P.push(mk(W/2,H*.55,true))}if(p<.5)burstDone=false}
