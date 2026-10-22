@@ -130,6 +130,15 @@ html{-webkit-text-size-adjust:100%}
 #lbx{position:absolute;top:calc(1rem + env(safe-area-inset-top));right:1rem;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:#26050f;cursor:pointer;font-size:1.2rem}
 input,select,textarea{min-height:48px}.btn{min-height:52px}
 @media(max-width:600px){section{padding-left:1.1rem;padding-right:1.1rem}.card{border-radius:90px 90px 6px 6px}#count{gap:.9rem}}
+html,body{overflow-x:clip;max-width:100%}
+.choice label{position:relative}
+.choice input{width:1px;height:1px;min-height:0;left:0;top:0}
+#hbg{display:none;position:absolute;inset:-6%;background:url(assets/poster.jpg) center/cover;filter:blur(26px) brightness(.55)}
+@media(max-aspect-ratio:1/1){
+ #hbg{display:block}
+ #hero video{inset:auto;left:0;top:44%;height:auto;aspect-ratio:4/3;transform:translateY(-50%);-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+}
+@media(max-aspect-ratio:1/1){.names{margin-top:2.6rem}}
 </style>
 </head>
 <body>
@@ -147,6 +156,7 @@ input,select,textarea{min-height:48px}.btn{min-height:52px}
 <button id="snd" aria-label="Mute or unmute music">🔊</button>
 
 <header id="hero">
+  <div id="hbg"></div>
   <video id="vid" src="assets/hero.mp4" poster="assets/poster.jpg" muted autoplay playsinline loop preload="auto"></video>
   <div class="hero-t">
     <h2>We are getting married</h2>
