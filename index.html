@@ -133,11 +133,6 @@ input,select,textarea{min-height:48px}.btn{min-height:52px}
 html,body{overflow-x:clip;max-width:100%}
 .choice label{position:relative}
 .choice input{width:1px;height:1px;min-height:0;left:0;top:0}
-#hbg{display:none;position:absolute;inset:-6%;background:url(assets/poster.jpg) center/cover;filter:blur(26px) brightness(.55)}
-@media(max-aspect-ratio:1/1){
- #hbg{display:block}
- #hero video{inset:auto;left:0;top:44%;height:auto;aspect-ratio:4/3;transform:translateY(-50%);-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
-}
 @media(max-aspect-ratio:1/1){.names{margin-top:2.6rem}}
 </style>
 </head>
@@ -156,8 +151,11 @@ html,body{overflow-x:clip;max-width:100%}
 <button id="snd" aria-label="Mute or unmute music">🔊</button>
 
 <header id="hero">
-  <div id="hbg"></div>
-  <video id="vid" src="assets/hero.mp4" poster="assets/poster.jpg" muted autoplay playsinline loop preload="auto"></video>
+  <video id="vid" muted autoplay playsinline loop preload="auto"></video>
+  <script>(function(){var v=document.getElementById("vid"),q=matchMedia("(max-aspect-ratio:1/1)"),cur;
+  function set(){var m=q.matches?"m":"d";if(m===cur)return;cur=m;v.poster=m=="m"?"assets/poster-mobile.jpg":"assets/poster.jpg";
+  v.src=m=="m"?"assets/hero-mobile.mp4":"assets/hero.mp4";v.muted=true;var p=v.play();p&&p.catch(function(){})}
+  set();q.addEventListener("change",set)})()</script>
   <div class="hero-t">
     <h2>We are getting married</h2>
     <span class="hint">SCROLL DOWN</span>
