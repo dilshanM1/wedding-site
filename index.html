@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--wine:#4a0b1d;--ink:#26050f;--gold:#d9ad5b;--ivory:#f8f0dd;--rose:#8c2a45;
+--serif:"Cormorant Garamond",Georgia,serif;--sans:"Mulish",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--ivory);font:300 1.05rem/1.7 var(--sans);overflow-x:hidden}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1}
+h2{font-size:clamp(2.2rem,6vw,3.8rem);color:var(--gold);text-align:center;margin-bottom:2.5rem}
+section{padding:clamp(4rem,10vw,8rem) 1.5rem}
+.wrap{max-width:960px;margin:auto}
+.gold{background:linear-gradient(90deg,#b98a35,#f3d489,#b98a35);-webkit-background-clip:text;background-clip:text;color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* gate */
+#gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;text-align:center;padding:2rem;
+background:radial-gradient(circle at 50% 40%,#6d1530,var(--ink) 70%);transition:opacity 1.2s,visibility 1.2s}
+#gate.off{opacity:0;visibility:hidden}
+#gate p{letter-spacing:.3em;font-size:.8rem;margin-bottom:1rem}
+#gate h1{font-size:clamp(2.6rem,9vw,5.5rem);margin-bottom:2rem}
+.seal{width:120px;height:120px;border-radius:50%;border:0;cursor:pointer;color:var(--wine);font:600 1.15rem var(--serif);
+background:radial-gradient(circle at 35% 30%,#f6dc9a,#b98a35);box-shadow:0 0 0 8px rgba(217,173,91,.2),0 10px 40px #000;animation:pulse 2.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 22px rgba(217,173,91,0),0 10px 40px #000}}
+
+/* hero */
+#hero{position:relative;height:100svh;padding:0;display:grid;place-items:end center;text-align:center;overflow:hidden}
+#hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#hero:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,var(--ink))}
+.hero-t{position:relative;z-index:2;padding:0 1.5rem 5rem}
+.hero-t h2{margin:0;color:var(--ivory);text-shadow:0 2px 20px #000;font-style:italic}
+.hint{display:block;margin-top:1.2rem;letter-spacing:.3em;font-size:.75rem;animation:bob 2s infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+#snd{position:fixed;right:1rem;top:1rem;z-index:40;width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:#26050fcc;cursor:pointer;font-size:1.1rem}
+
+/* scroll story */
+#story{height:420vh;padding:0;position:relative;background:linear-gradient(var(--ink),var(--wine) 50%,var(--ink))}
+.stage{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:1rem;padding:clamp(1rem,5vh,3rem) 1rem clamp(1.5rem,6vh,3.5rem)}
+.glow{position:absolute;inset:0;background:radial-gradient(ellipse 45% 42% at 50% 58%,#d9ad5b66,transparent 70%);opacity:0;pointer-events:none}
+.names{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:0 1.2rem;text-align:center;position:relative;z-index:2;will-change:transform,opacity}
+.names h2{margin:0;font-size:clamp(2.4rem,8vw,5.2rem)}
+.names .amp{font:italic clamp(1.6rem,4vw,2.6rem) var(--serif);color:var(--ivory)}
+.arena{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:0}
+.fig{height:100%;width:auto;max-width:47%;object-fit:contain;object-position:bottom;will-change:transform;filter:drop-shadow(0 20px 25px #000a)}
+#groom{margin-left:-3%}
+.together{text-align:center;opacity:0;max-width:720px;margin:0 auto;font:italic clamp(1.1rem,3.2vw,1.8rem)/1.4 var(--serif);will-change:transform,opacity}
+#fx{position:fixed;inset:0;z-index:35;pointer-events:none}
+
+/* details */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.card{border:1px solid #d9ad5b66;padding:2rem 1.5rem;text-align:center;background:#4a0b1d66;border-radius:120px 120px 6px 6px}
+.card h3{font-size:1.6rem;color:var(--gold);margin-bottom:.5rem}
+.card big{display:block;font:600 2.4rem var(--serif)}
+.card a{color:var(--gold)}
+#count{display:flex;justify-content:center;gap:clamp(.8rem,4vw,2.5rem);margin-top:3.5rem;text-align:center}
+#count b{display:block;font:600 clamp(2rem,8vw,3.6rem) var(--serif);color:var(--gold)}
+#count span{font-size:.8rem;letter-spacing:.15em}
+
+/* timeline */
+#events{background:linear-gradient(var(--ink),var(--wine))}
+.tl{position:relative;max-width:640px;margin:auto;padding-left:2.2rem;border-left:1px solid var(--gold)}
+.ev{position:relative;padding-bottom:2.2rem}
+.ev:before{content:"";position:absolute;left:calc(-2.2rem - 6px);top:.6rem;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px #d9ad5b33}
+.ev time{font:600 1rem var(--serif);color:var(--gold);letter-spacing:.08em}
+.ev h3{font-size:1.9rem}
+.ev p{opacity:.8}
+
+/* photos */
+.photo{position:relative;height:90svh;overflow:hidden;padding:0;display:grid;place-items:end start}
+.photo img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover;will-change:transform}
+.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,#26050fee)}
+.photo div{position:relative;z-index:2;padding:2rem 1.5rem 4rem;max-width:620px}
+.photo h2{text-align:left;margin-bottom:.5rem}
+
+/* rsvp */
+form{max-width:560px;margin:auto;display:grid;gap:1.1rem}
+label{font-size:.85rem;letter-spacing:.08em;display:grid;gap:.4rem}
+input,select,textarea{background:#ffffff12;border:1px solid #d9ad5b88;border-radius:4px;padding:.8rem 1rem;width:100%}
+select option{color:#000}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.choice label{cursor:pointer}
+.choice input{position:absolute;opacity:0}
+.choice span{display:block;text-align:center;padding:.9rem;border:1px solid var(--gold);border-radius:4px;transition:.2s}
+.choice input:checked+span{background:var(--gold);color:var(--wine);font-weight:600}
+.choice input:focus-visible+span{outline:2px solid var(--ivory)}
+.btn{background:linear-gradient(90deg,#b98a35,#f3d489);color:var(--wine);font-weight:600;border:0;padding:1rem;border-radius:4px;cursor:pointer;font-size:1rem}
+#thanks{display:none;text-align:center;font:italic 1.8rem var(--serif);padding:3rem 1rem;border:1px solid var(--gold);max-width:560px;margin:auto}
+#fail{color:#f3b0b0;text-align:center}
+.wishes{max-width:560px;margin:2.5rem auto 0;font-style:italic;text-align:center;opacity:.8}
+
+/* footer */
+footer{text-align:center;padding:4rem 1.5rem calc(3rem + env(safe-area-inset-bottom));background:#14030a;border-top:1px solid #d9ad5b55}
+footer h2{margin-bottom:.5rem}
+footer small{opacity:.6;display:block;margin-top:1.5rem}
+
+.rv{opacity:0;transform:translateY(24px);transition:1s}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div>
+    <p>WITH JOY WE INVITE YOU</p>
+    <h1 class="gold" id="gNames"></h1>
+    <button class="seal" id="open" aria-label="Open invitation and play music">Open</button>
+  </div>
+</div>
+
+<canvas id="fx"></canvas>
+<audio id="song" src="assets/song.mp3" loop preload="auto"></audio>
+<button id="snd" aria-label="Mute or unmute music">🔊</button>
+
+<header id="hero">
+  <video id="vid" src="assets/hero.mp4" muted autoplay playsinline loop preload="auto"></video>
+  <div class="hero-t">
+    <h2>We are getting married</h2>
+    <span class="hint">SCROLL DOWN</span>
+  </div>
+</header>
+
+<section id="story" aria-label="Our story">
+  <div class="stage">
+    <div class="glow" id="glow"></div>
+    <div class="names" id="names"><h2 class="gold" id="sName1"></h2><span class="amp">&amp;</span><h2 class="gold" id="sName2"></h2></div>
+    <div class="arena">
+      <img class="fig" id="bride" src="assets/bride.png" alt="Bride">
+      <img class="fig" id="groom" src="assets/groom.png" alt="Groom">
+    </div>
+    <p class="together" id="together">Two hearts, two families, one beautiful beginning.<br>Together with our parents, we invite you to bless our union.</p>
+  </div>
+</section>
+
+<section id="details">
+  <div class="wrap">
+    <h2 class="rv">Save the Date</h2>
+    <div class="cards">
+      <div class="card rv"><h3>Date</h3><big id="dDate"></big><p id="dDay"></p></div>
+      <div class="card rv"><h3>Time</h3><big id="dTime"></big><p id="dTimeNote"></p></div>
+      <div class="card rv"><h3>Venue</h3><big id="dVenue" style="font-size:1.7rem"></big><p id="dAddr"></p><a id="dMap" target="_blank" rel="noopener">Open in Maps</a></div>
+    </div>
+    <div id="count" class="rv" aria-live="off">
+      <div><b id="cd">0</b><span>DAYS</span></div><div><b id="ch">0</b><span>HOURS</span></div><div><b id="cm">0</b><span>MINUTES</span></div><div><b id="cs">0</b><span>SECONDS</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <h2 class="rv">Order of the Day</h2>
+    <div class="tl" id="tl"></div>
+  </div>
+</section>
+
+<section class="photo" aria-label="Ring exchange">
+  <img data-par src="assets/rings.jpg" alt="Bride and groom exchanging rings at the poruwa">
+  <div class="rv"><h2>With this ring</h2><p>Beneath the golden poruwa, surrounded by family and the blessings of those we love most.</p></div>
+</section>
+
+<section class="photo" aria-label="Just married">
+  <img data-par src="assets/leaving.jpg" alt="Bride and groom leaving the hotel, Just Married">
+  <div class="rv"><h2>Just married</h2><p>And off we go, into a lifetime together. Come celebrate the beginning.</p></div>
+</section>
+
+<section id="rsvp">
+  <div class="wrap">
+    <h2 class="rv">Will you join us?</h2>
+    <form id="form">
+      <label>Your name<input name="name" required autocomplete="name"></label>
+      <div class="choice" role="radiogroup" aria-label="Attendance">
+        <label><input type="radio" name="attend" value="Yes" required><span>Joyfully attending</span></label>
+        <label><input type="radio" name="attend" value="No"><span>Sadly can't make it</span></label>
+      </div>
+      <label>Number of guests (including you)<select name="guests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+      <label>Phone or email (optional)<input name="contact"></label>
+      <label>A wish for the couple (optional)<textarea name="msg" rows="3"></textarea></label>
+      <button class="btn" type="submit">Send my reply</button>
+      <p id="fail" role="alert"></p>
+    </form>
+    <div id="thanks" role="status"></div>
+    <p class="wishes" id="wish"></p>
+  </div>
+</section>
+
+<footer>
+  <h2 class="gold" id="fNames"></h2>
+  <p id="fDate"></p>
+  <p>Your presence is the greatest gift.</p>
+  <small>Made with love · <span id="yr"></span></small>
+</footer>
+
+<script>
+/* ========= EDIT YOUR DETAILS HERE ========= */
+const C={
+  bride:"Nimali", groom:"Kasun",
+  date:"2027-01-24T10:30:00",           // wedding date & time
+  venue:"Heritage Palace Hotel & Resort",
+  address:"Colombo, Sri Lanka",
+  map:"https://maps.google.com/?q=Colombo",
+  whatsapp:"",                           // e.g. "94771234567" – RSVPs also open to this number
+  endpoint:"",                           // optional: Formspree / Google Apps Script URL to collect RSVPs
+  events:[
+    ["9:30 AM","Welcome & Arrival","Guests are greeted with a traditional welcome drink."],
+    ["10:30 AM","Ashtaka & Jayamangala Gatha","Blessings are chanted for the couple's new life."],
+    ["10:45 AM","Poruwa Cheritha","The sacred ceremony beneath the poruwa: the bride and groom are joined with the bonding thread."],
+    ["11:30 AM","Ring Exchange & Signing","Rings are exchanged and the registers are signed."],
+    ["12:30 PM","Cake Cutting & Toast","Raise a glass to the newlyweds."],
+    ["1:00 PM","Wedding Lunch","A feast of Sri Lankan favourites."],
+    ["3:00 PM","Going Away","The couple leaves for their new home, showered with petals."]
+  ]
+};
+/* ========================================== */
+const $=id=>document.getElementById(id),d=new Date(C.date);
+const names=C.bride+" & "+C.groom;
+$("gNames").textContent=$("fNames").textContent=names;
+$("sName1").textContent=C.bride;$("sName2").textContent=C.groom;
+document.title=names+" · Wedding Invitation";
+$("dDate").textContent=d.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+$("dDay").textContent=d.toLocaleDateString("en-GB",{weekday:"long"});
+$("dTime").textContent=d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+$("dTimeNote").textContent="Poruwa ceremony begins";
+$("dVenue").textContent=C.venue;$("dAddr").textContent=C.address;$("dMap").href=C.map;
+$("fDate").textContent=$("dDate").textContent;$("yr").textContent=d.getFullYear();
+$("tl").innerHTML=C.events.map(e=>`<div class="ev rv"><time>${e[0]}</time><h3>${e[1]}</h3><p>${e[2]}</p></div>`).join("");
+
+/* music: your own song (assets/song.mp3); video stays muted. Falls back to a soft built-in melody */
+const v=$("vid"),snd=$("snd"),song=$("song");let isMuted=false,sg;
+v.muted=true;v.play().catch(()=>{});
+function synth(){
+  const ac=new(window.AudioContext||window.webkitAudioContext)(),g=ac.createGain();sg=g;g.gain.value=.2;
+  const dl=ac.createDelay(),fb=ac.createGain();dl.delayTime.value=.38;fb.gain.value=.45;
+  g.connect(ac.destination);g.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(ac.destination);
+  [130.8,196,261.6].forEach(f=>{const o=ac.createOscillator(),pg=ac.createGain();o.type="triangle";o.frequency.value=f;pg.gain.value=.04;o.connect(pg);pg.connect(g);o.start()});
+  const sc=[261.6,293.7,329.6,392,440,523.3,587.3,659.3],seq=[0,2,4,2,5,4,2,3,1,2,4,6,5,4,2,1];let i=0;
+  setInterval(()=>{const t=ac.currentTime,o=ac.createOscillator(),e=ac.createGain();o.frequency.value=sc[seq[i++%16]];
+    e.gain.setValueAtTime(0,t);e.gain.linearRampToValueAtTime(.45,t+.05);e.gain.exponentialRampToValueAtTime(.001,t+1.8);
+    o.connect(e);e.connect(g);o.start(t);o.stop(t+2)},620);
+}
+function setMute(m){isMuted=m;song.muted=m;if(sg)sg.gain.value=m?0:.2;snd.textContent=m?"🔇":"🔊"}
+document.body.style.overflow="hidden";
+$("open").onclick=()=>{$("gate").classList.add("off");document.body.style.overflow="";scrollTo(0,0);song.volume=.75;song.play().catch(synth)};
+snd.onclick=()=>setMute(!isMuted);
+
+/* floating roses & petals (react to scroll speed) */
+const cv=$("fx"),cx=cv.getContext("2d"),still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let W,H,sy=scrollY,vel=0,burstDone=false;const P=[],COL=["#b3122f","#d4274a","#e8587a","#f2a1b5"];
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
+function mk(x,y,b){return{x:x??Math.random()*W,y:y??Math.random()*H,z:.4+Math.random()*.9,rose:Math.random()<.2,r:Math.random()*6,vr:(Math.random()-.5)*.03,sw:Math.random()*6,
+  vx:b?(Math.random()-.5)*14:0,vy:b?-Math.random()*12-3:0,b,c:COL[Math.random()*4|0]}}
+for(let i=0;i<(still?0:32);i++)P.push(mk());
+function petal(p){const s=14*p.z;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.globalAlpha=.85;cx.beginPath();
+  cx.moveTo(0,-s);cx.bezierCurveTo(s,-s*.6,s*.8,s*.8,0,s);cx.bezierCurveTo(-s*.8,s*.8,-s,-s*.6,0,-s);cx.fill();cx.restore()}
+function loop(){cx.clearRect(0,0,W,H);vel*=.92;
+  for(let i=P.length;i--;){const p=P[i];p.sw+=.02;p.x+=Math.sin(p.sw)*.7*p.z+p.vx;p.y+=(.5+vel*.7)*p.z+p.vy;p.vx*=.96;p.vy*=.96;p.r+=p.vr+vel*.003;
+    if(p.y>H+40||p.y<-60||p.x<-50||p.x>W+50){if(p.b){P.splice(i,1);continue}p.y=vel<-1?H+30:-30;p.x=Math.random()*W}
+    if(p.rose){cx.save();cx.translate(p.x,p.y);cx.rotate(p.r*.3);cx.font=26*p.z+"px serif";cx.textAlign="center";cx.fillText("🌹",0,0);cx.restore()}else petal(p)}
+  requestAnimationFrame(loop)}
+if(!still)loop();
+
+/* scroll-driven story */
+const story=$("story"),br=$("bride"),gr=$("groom"),nm=$("names"),tg=$("together"),gl=$("glow");
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),ease=t=>t*t*(3-2*t);
+function tick(){
+  const r=story.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight));
+  const move=ease(clamp(p/.62)),off=(1-move)*(innerWidth*.55+220),bob=Math.sin(move*40)*(1-move)*8;
+  br.style.transform=`translate(${-off}px,${bob}px)`;gr.style.transform=`translate(${off}px,${-bob}px)`;
+  gl.style.opacity=move;
+  const n=ease(clamp((p-.35)/.25));nm.style.opacity=n;nm.style.transform=`translateY(${(1-n)*30}px) scale(${.9+.1*n})`;
+  const t=ease(clamp((p-.72)/.2));tg.style.opacity=t;tg.style.transform=`translateY(${(1-t)*30}px)`;
+  if(!still){if(p>.62&&p<.98&&!burstDone){burstDone=true;for(let i=0;i<70;i++)P.push(mk(W/2,H*.55,true))}if(p<.5)burstDone=false}
+  document.querySelectorAll("[data-par]").forEach(img=>{const b=img.parentElement.getBoundingClientRect();img.style.transform=`translateY(${(b.top/innerHeight)*-8}%)`});
+}
+addEventListener("scroll",()=>{vel=clamp(vel+(scrollY-sy)*.15,-30,30);sy=scrollY;requestAnimationFrame(tick)},{passive:true});addEventListener("resize",tick);tick();
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&(e.target.classList.add("in"),io.unobserve(e.target))),{threshold:.2});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+
+/* countdown */
+function cd(){let s=Math.max(0,(d-Date.now())/1000|0);
+  $("cd").textContent=s/86400|0;$("ch").textContent=s%86400/3600|0;$("cm").textContent=s%3600/60|0;$("cs").textContent=s%60}
+cd();setInterval(cd,1000);
+
+/* RSVP */
+const KEY="rsvp-replies",form=$("form");
+function wishes(){const l=JSON.parse(localStorage.getItem(KEY)||"[]").filter(x=>x.msg);
+  $("wish").textContent=l.length?`“${l[l.length-1].msg}” — ${l[l.length-1].name}`:""}
+try{wishes()}catch(e){}
+form.onsubmit=async e=>{
+  e.preventDefault();const f=Object.fromEntries(new FormData(form)),fail=$("fail");fail.textContent="";
+  f.time=new Date().toISOString();
+  try{const l=JSON.parse(localStorage.getItem(KEY)||"[]");l.push(f);localStorage.setItem(KEY,JSON.stringify(l))}catch(_){}
+  let ok=true;
+  if(C.endpoint){try{const r=await fetch(C.endpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(f)});ok=r.ok}catch(_){ok=false}}
+  if(!ok){fail.textContent="We couldn't send your reply. Check your connection and press Send again.";return}
+  const yes=f.attend==="Yes";
+  form.style.display="none";const t=$("thanks");t.style.display="block";
+  t.textContent=yes?`Thank you, ${f.name}! We can't wait to celebrate with you.`:`Thank you, ${f.name}. You will be missed, and we're grateful for your love.`;
+  if(C.whatsapp){const m=`${f.name} – ${yes?"Attending ("+f.guests+" guest/s)":"Not attending"}${f.msg?". "+f.msg:""}`;
+    window.open(`https://wa.me/${C.whatsapp}?text=${encodeURIComponent(m)}`,"_blank")}
+  try{wishes()}catch(_){}
+};
+</script>
+</body>
+</html>
